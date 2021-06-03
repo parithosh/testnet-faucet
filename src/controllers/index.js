@@ -126,5 +126,5 @@ module.exports = function (app) {
 	  	response.send({
 	  		success: successResponse
 	  	})
-	}
+    }
 }

@@ -3,4 +3,5 @@ function debug (isDebug, text) {
   		console.log(text)
 	}
 }
+
 module.exports = { debug }
