@@ -1,5 +1,6 @@
 stages:
   - package
+  - deploy
 
 docker-package:
   stage: package
@@ -14,3 +15,16 @@ docker-package:
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME $CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
     - docker push $CI_REGISTRY_IMAGE:latest
+
+deployment:
+  stage: deploy
+  image: docker.slock.it/build-images/custody-k8s-deployment-image
+  rules:
+    - when: manual
+  tags:
+    - deployment
+  environment:
+    name: internal
+    url: https://goerli-faucet.slock.it
+  script:
+    - helm upgrade --atomic -i --set key=${FAUCET_KEY} goerli-faucet-$CI_ENVIRONMENT_SLUG ./faucet
