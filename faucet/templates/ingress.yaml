@@ -1,0 +1,17 @@
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: goerli-faucet-slock
+  labels:
+    project: goerli-faucet
+    app: goerli-faucet
+spec:
+  virtualhost:
+    fqdn: "goerli-faucet.slock.it"
+  routes:
+    - services:
+        - name: goerli-faucet
+          port: 80
+        - name: goerli-faucet
+          port: 443

@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: goerli-faucet
+  name: goerli-faucet
+spec:
+  selector:
+    project: goerli-faucet
+    app: goerli-faucet
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5001
+      name: goerli-faucet-http
+    - protocol: TCP
+      port: 443
+      targetPort: 5001
+      name: goerli-faucet-https
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goerli-faucet
+  labels:
+    app: goerli-faucet
+    project: goerli-faucet
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      project: goerli-faucet
+  template:
+    metadata:
+      labels:
+        app: goerli-faucet
+        project: goerli-faucet
+    spec:
+      containers:
+        - image: docker.slock.it/core-technology/goerli-faucet:{{ .Values.version }}
+          imagePullPolicy: Always
+          name: goerli-faucet
+          ports:
+            - containerPort: 5001
+              protocol: TCP
+          env:
+            RPC: {{ .Values.rpc }}
+            BASEURL: {{ .Values.base_url }}
+            ACCOUNT: {{ .Values.account }}
+            KEY: {{ .Values.key }}
+      imagePullSecrets:
+        - name: gitlab-image-secret
+      restartPolicy: Always
