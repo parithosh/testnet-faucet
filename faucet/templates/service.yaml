@@ -51,10 +51,14 @@ spec:
             - containerPort: 5001
               protocol: TCP
           env:
-            RPC: {{ .Values.rpc }}
-            BASEURL: {{ .Values.base_url }}
-            ACCOUNT: {{ .Values.account }}
-            KEY: {{ .Values.key }}
+            - name: RPC
+              value: {{ .Values.rpc }}
+            - name: BASEURL
+              value: {{ .Values.base_url }}
+            - name: ACCOUNT
+              value: {{ .Values.account }}
+            - name: KEY
+              value: {{ .Values.key }}
       imagePullSecrets:
         - name: gitlab-image-secret
       restartPolicy: Always
