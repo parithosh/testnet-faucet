@@ -55,13 +55,13 @@ app.configureWeb3(config)
 	require('./src/controllers/index')(app)
 
 	app.get('/', function(request, response) {
-	  response.send('Goerli Network faucet')
+	  response.send('Testnet Network faucet')
 	});
 
 	app.set('port', (process.env.PORT || 5001))
 
 	app.listen(app.get('port'), function () {
-	    console.log('Goerli Network faucet is running on port', app.get('port'))
+	    console.log('Testnet Network faucet is running on port', app.get('port'))
 	})
 })
 .catch(error => {

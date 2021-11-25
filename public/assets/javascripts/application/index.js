@@ -22,7 +22,7 @@ $(function() {
 			$("#receiver").val('');
 			loader.addClass("hidden");
 			swal("Success",
-			  `0.05 GoETH has been successfully transferred to <a href="https://blockscout.com/eth/goerli/tx/${data.success.txHash}" target="blank">${receiver}</a>`,
+			  `ETH has been successfully transferred to ${receiver}`,
 			  "success"
 			);
 		}).fail(function(err) {
