@@ -5,6 +5,7 @@
     "secret": "6Lfe3I0UAAAAAJGAlZEETVmbk3-wRnqYH1ActFme"
   },
   "Ethereum": {
+    "chainId": 5,
     "milliEtherToTransfer": 50,
     "gasLimit": "30000",
     "live": {

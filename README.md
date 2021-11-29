@@ -55,7 +55,3 @@ You can also configure things by using environment variables:
 - Configure your `index.html` file as shown above
 - Run the docker image with `docker run -d -v ./config.json:/app/config.json -v ./index.html:/app/public/index.html -p 5001:5001 parithoshj/testnet-faucet:v1.0.3`
 - Check `docker logs <container name>` to see if its running correctly
-
-### Caveats
-- The faucet currently requires a JSON RPC with `--rpc.allow-unprotected-txs` enabled (in the case of geth). Otherwise
-submitted tx'es will give you an error related to EIP-155.
