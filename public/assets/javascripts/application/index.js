@@ -8,10 +8,15 @@ $.getJSON("config.json", function(json) {
 });
 
 $(function() {
-	grecaptcha.ready(function(){
-    grecaptcha.render("recaptcha", {
+
+	var initRecaptcha = function(){
+		grecaptcha.render("recaptcha", {
       sitekey: config.recaptchaKey
     });
+	}
+
+	grecaptcha.ready(function(){
+    initRecaptcha()
   });
 
 	var loader = $(".loading-container");
@@ -30,7 +35,6 @@ $(function() {
 		  	type:"POST",
 		  	data: $this.serialize()
 		}).done(function(data) {
-			grecaptcha.reset("recaptcha");
 			if (!data.success) {
 				loader.addClass("hidden");
 				console.log(data)
@@ -46,7 +50,6 @@ $(function() {
 			  "success"
 			);
 		}).fail(function(err) {
-			grecaptcha.reset("recaptcha");
 			console.log(err);
 			loader.addClass("hidden");
 		});
