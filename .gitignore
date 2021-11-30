@@ -1,4 +1,5 @@
 .DS_Store
+.idea
 node_modules/
 public/assets/javascripts/application.js
 public/assets/stylesheets/application.css
