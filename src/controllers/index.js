@@ -82,6 +82,7 @@ module.exports = function (app) {
         const BN = web3.utils.BN;
         const ethToSend = web3.utils.toWei(new BN(config.Ethereum.milliEtherToTransfer), "milliether");
         const rawTx = {
+            chainId: config.Ethereum.chainId,
             nonce: nonceHex,
             gasPrice: gasPriceHex,
             gasLimit: gasLimitHex,
