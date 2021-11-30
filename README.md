@@ -8,17 +8,16 @@ This Faucet is based on https://github.com/poanetwork/poa-faucet
   ```
   git clone https://github.com/parithosh/testnet-faucet
   ```
-2. Copy `config.json.example` to `config.json`
+3. Sign-up for Google recaptcha in the admin portal [here](http://www.google.com/recaptcha/admin). For more info, [see](https://developers.google.com/recaptcha/docs/verify?hl=ru)
+2. Edit and copy configuration examples
   ```
-  cp config.json.example config.json
+  cp config.server.json config.json
+  cp config.ui.server.json public/config.json
   ```
-2. Update config.json `./config.json` (see config.json with placeholders below)
-3. Sign-up for Google recaptcha in the admin portal [here](http://www.google.com/recaptcha/admin)
-4. Update `./public/index.html`: Find `<div class="g-recaptcha" data-sitekey="type your reCaptcha plugin secret here"></div>` line and type your reCaptcha plugin secret in `data-sitekey` attribute. For more info, [see](https://developers.google.com/recaptcha/docs/verify?hl=ru)
-5. Install dependencies `npm install` from the project's root
-6. Run faucet with `npm start`. the faucet will be launched at `http://localhost:5001`
+4. Install dependencies `npm install` from the project's root
+5. Run faucet with `npm start`. the faucet will be launched at `http://localhost:5001`
 
-### Server config.json (`./config.json`) with placeholders
+### Server config.json (`./config.json`)
 ```
 {
   "environment": "switcher between configurations: 'prod' or 'dev'",
@@ -27,6 +26,7 @@ This Faucet is based on https://github.com/poanetwork/poa-faucet
     "secret": "reCaptcha plugin secret"
   },
   "Ethereum": {
+    "chainId": 5,
     "etherToTransfer": "The number of milliEther to be sent from the faucet. For example, 500",
     "gasLimit": "Transaction gas limit, for example, 21000",
     "prod": {
@@ -41,17 +41,27 @@ This Faucet is based on https://github.com/poanetwork/poa-faucet
 }
 ```
 
-### Configure using environment variables
+### Web UI config.json (`./public/config.json`)
+```
+{
+  "title": "Testnet faucet",
+  "buttonText": "Request ETH",
+  "logoUrl": "https://launchpad.ethereum.org/static/media/eth2-leslie-rhino.243747b9.png",
+  "recaptchaKey": "reCaptcha plugin secret",
+  "footer": "Some footer text"
+}
 
-You can also configure things by using environment variables:
+```
 
-* `ACCOUNT` - Ethereum account to send fund from
-* `KEY` - Private key for that account
-* `RPC` - RPC endpoint to use
-
-## Configure for testnets using docker
-- We will have a local `config.json` and `index.html` file that will overwrite the one in the docker image
-- Configure your `config.json` file as shown above
-- Configure your `index.html` file as shown above
-- Run the docker image with `docker run -d -v ./config.json:/app/config.json -v ./index.html:/app/public/index.html -p 5001:5001 parithoshj/testnet-faucet:v1.0.3`
-- Check `docker logs <container name>` to see if its running correctly
+## Configure using Docker
+- We will have a local `config.server.json` and `config.ui.json` file that will overwrite the one in the docker image
+- Configure your `config.server.json` file as shown above
+- Configure your `config.ui.json` file as shown above
+- Run the docker image with
+  ```
+  docker run --name faucet -d \
+    -v ./config.server.json:/app/config.json \
+    -v ./config.ui.json:/app/public/config.json \
+    -p 5001:5001 parithoshj/testnet-faucet:latest
+  ```
+- Check `docker logs faucet` to see if its running correctly

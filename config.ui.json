@@ -1,0 +1,7 @@
+{
+  "title": "Testnet faucet",
+  "buttonText": "Request ETH",
+  "logoUrl": "https://launchpad.ethereum.org/static/media/eth2-leslie-rhino.243747b9.png",
+  "recaptchaKey": "6Lfe3I0UAAAAAJGAlZEETVmbk3-wRnqYH1ActFme",
+  "footer": "Forked from <b>Slock.it</b> by Pari - Send feedback to https://github.com/parithosh/testnet-faucet"
+}

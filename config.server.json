@@ -9,7 +9,7 @@
     "milliEtherToTransfer": 50,
     "gasLimit": "30000",
     "live": {
-      "rpc": "",
+      "rpc": "http://somehwere:8545",
       "account": "",
       "privateKey": ""
     }
