@@ -8,7 +8,12 @@
     <link rel="icon" type="image/png" sizes="192x192" href="./favicons/favicon-32x32.png">
     <link rel="manifest" href="./favicons/manifest.webmanifest">
     <link href="./favicons/favicon.ico" rel="icon" type="image/x-icon">
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script type="text/javascript">
+      var onloadCallback = function() {
+        console.log("grecaptcha is ready");
+      };
+    </script>
+    <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit'></script>
   </head>
   <body>
     <section class="content">
@@ -20,7 +25,7 @@
             <button type="submit" id="requestTokens" class="request-tokens-button">Request 0.05 G&ouml;ETH</button>
         </div>
         <div class="text-xs-center">
-          <div id="recaptcha" class="g-recaptcha" data-sitekey=""></div>
+          <div id="recaptcha" class="g-recaptcha"></div>
         </div>
       </form>
     </section>
